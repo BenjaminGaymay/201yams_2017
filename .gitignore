@@ -1,0 +1,6 @@
+__pycache__
+.editorconfig
+.vscode
+~*
+#*#
+.idea
