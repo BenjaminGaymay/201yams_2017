@@ -25,8 +25,13 @@ DESCRIPTION
 def check_dices(dices):
     """ Checks value of dices """
 
-    for dice in dices:
-        if int(dice) > 6:
+    for index, value in enumerate(dices):
+        try:
+            if int(value) > 6 or int(value) < 0:
+                print("Error: d%d ------" % (index + 1), file=sys.stderr)
+                return 84
+        except ValueError:
+            print("Error: d%d -----" % (index + 1), file=sys.stderr)
             return 84
     return 0
 
@@ -44,23 +49,29 @@ def check_args(argv):
     for arg in argv:
         dices.append(arg)
 
-    combinaison = argv[5].split("_")
-    if combinaison[0] not in OPTIONS.keys():
+    tmp = argv[5].split("_")
+    if tmp[0] not in OPTIONS.keys():
         print("Error: -----", file=sys.stderr)
         exit(84)
 
-    return dices[:-1], combinaison
+    return dices[:-1]
 
 
 def game_yams(argv):
     """ Yams main function """
 
-    dices, combinaison = check_args(argv[1:])
+    dices = check_args(argv[1:])
 
     if check_dices(dices) == 84:
         return 84
     combinaison = argv[6].split("_")
-    return OPTIONS[combinaison[0]](combinaison, dices)
+    if len(combinaison) == 1 or combinaison.count("") != 0:
+        print("Error: --------", file=sys.stderr)
+    elif combinaison.count("0") != 0:
+        print("Error: --------", file=sys.stderr)
+    else:
+        return OPTIONS[combinaison[0]](combinaison, dices)
+    return 84
 
 
 if __name__ == "__main__":

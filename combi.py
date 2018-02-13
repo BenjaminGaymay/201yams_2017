@@ -2,7 +2,8 @@
 """ Combinaison functions """
 
 from binomial import binomial, calc_combination
-
+from math import factorial
+from sys import stderr
 
 def print_result(combinaison, number, chances):
     """ Print chances """
@@ -59,6 +60,7 @@ def full(combinaison, dices):
 
     number = float(1)
     if len(combinaison) != 3:
+        print("Error: ----------", file=stderr)
         return 84
     brelan, double = combinaison[1], combinaison[2]
     b_val, d_val = dices.count(brelan), dices.count(double)
@@ -72,8 +74,22 @@ def full(combinaison, dices):
 def straight(combinaison, dices):
     """ Straight combinaison. """
 
-    number = float(1)
-    dices.sort()
+    if combinaison[1] not in ["5", "6"]:
+        print("Error: ----------", file=stderr)
+        return 84
+    nb_doubles = dices.count("0")
+    dices = [value for value in dices if value != "0"]
+    doubles = dict([(value, dices.count(value)) for value in dices])
+
+    for double in doubles.values():
+        nb_doubles += double - 1
+
+    if combinaison[1] == "5" and "6" in doubles.keys():
+        nb_doubles += 1
+    elif combinaison[1] == "6" and "1" in doubles.keys():
+        nb_doubles += 1
+
+    number = factorial(nb_doubles) / 6 **nb_doubles * 100
     print_result("straight", combinaison[1], number)
     return 0
 
