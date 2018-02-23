@@ -69,6 +69,8 @@ def game_yams(argv):
         print("Error: bad combination", file=sys.stderr)
     elif combinaison.count("0") != 0:
         print("Error: bad combination", file=sys.stderr)
+    elif combinaison[1] < "1" or combinaison[1] > "6":
+        print("Error: bad combination", file=sys.stderr)
     else:
         return OPTIONS[combinaison[0]](combinaison, dices)
     return 84
