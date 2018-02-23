@@ -25,6 +25,9 @@ DESCRIPTION
 def check_dices(dices):
     """ Checks value of dices """
 
+    if dices.count("0") < 5 and dices.count("0") > 0:
+        print("all dices must be thrown", file=sys.stderr)
+        return 84
     for index, value in enumerate(dices):
         try:
             if int(value) > 6 or int(value) < 0:

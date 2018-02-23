@@ -59,14 +59,14 @@ def full(combinaison, dices):
     """ Full combinaison. """
 
     number = float(1)
+    if len(combinaison) != 3:
+        print("Error: Full: too many numbers", file=stderr)
+        return 84
     if (combinaison[1] is combinaison[2]):
         print("Error: bad full combinaison")
         return 84
     if (combinaison[1] > "6" or combinaison[1] < "1" or combinaison[2] > "6" or combinaison[2] < "1"):
         print("Error: Full: number between 1 and 6", file=stderr)
-        return 84
-    if len(combinaison) != 3:
-        print("Error: Full: too many numbers", file=stderr)
         return 84
     brelan, double = combinaison[1], combinaison[2]
     b_val, d_val = dices.count(brelan), dices.count(double)
