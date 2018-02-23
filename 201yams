@@ -42,7 +42,7 @@ def check_args(argv):
     if "-h" in argv:
         exit(print_help(0))
     if len(argv) != 6:
-        print("Error: ----", file=sys.stderr)
+        print("Error: Bad args", file=sys.stderr)
         exit(84)
 
     dices = []
@@ -51,7 +51,7 @@ def check_args(argv):
 
     tmp = argv[5].split("_")
     if tmp[0] not in OPTIONS.keys():
-        print("Error: -----", file=sys.stderr)
+        print("Error: Bad args", file=sys.stderr)
         exit(84)
 
     return dices[:-1]
@@ -68,7 +68,7 @@ def game_yams(argv):
     if len(combinaison) == 1 or combinaison.count("") != 0:
         print("Error: bad combination", file=sys.stderr)
     elif combinaison.count("0") != 0:
-        print("Error: --------", file=sys.stderr)
+        print("Error: bad combination", file=sys.stderr)
     else:
         return OPTIONS[combinaison[0]](combinaison, dices)
     return 84
