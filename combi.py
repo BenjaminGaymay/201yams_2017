@@ -28,6 +28,9 @@ def calc_probabilities(nb_success, nb_dices, already_ok):
 def pair(combinaison, dices):
     """ Pair combinaison. """
 
+    if len(combinaison) > 2:
+        print("Error: Too many numbers")
+        return 84
     nb_success = 2 - dices.count(combinaison[1])
     number = calc_probabilities(nb_success, len(dices), dices.count(combinaison[1]))
 
@@ -38,6 +41,9 @@ def pair(combinaison, dices):
 def three(combinaison, dices):
     """ Three combinaison. """
 
+    if len(combinaison) > 2:
+        print("Error: Too many numbers")
+        return 84
     nb_success = 3 - dices.count(combinaison[1])
     number = calc_probabilities(nb_success, len(dices), dices.count(combinaison[1]))
 
@@ -48,6 +54,9 @@ def three(combinaison, dices):
 def four(combinaison, dices):
     """ Four combinaison. """
 
+    if len(combinaison) > 2:
+        print("Error: Too many numbers")
+        return 84
     nb_success = 4 - dices.count(combinaison[1])
     number = calc_probabilities(nb_success, len(dices), dices.count(combinaison[1]))
 
@@ -80,6 +89,9 @@ def full(combinaison, dices):
 def straight(combinaison, dices):
     """ Straight combinaison. """
 
+    if len(combinaison) > 2:
+        print("Error: Too many numbers")
+        return 84
     if combinaison[1] not in ["5", "6"]:
         print("Error: ----------", file=stderr)
         return 84
@@ -103,6 +115,9 @@ def straight(combinaison, dices):
 def yams(combinaison, dices):
     """ Yams combinaison. """
 
+    if len(combinaison) > 2:
+        print("Error: Too many numbers")
+        return 84
     nb_throw = len(dices) - dices.count(combinaison[1])
     number = (binomial(nb_throw, nb_throw, 1 / 6)) * 100
     print_result("yams", combinaison[1], number)
